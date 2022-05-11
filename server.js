@@ -24,7 +24,9 @@ app.use("/customers", customers_routes);
 app.use("/suppliers", suppliers_routes);
 app.use("/products", products_routes);
 
-app.get("/", (req, res) => res.send("Server running at port ", PORT));
+app.get("/", (req, res) => {
+  res.status(200).send("Server running at port " + PORT);
+});
 
 mongoose.connect(MONGO_URI, (err) => {
   if (err) console.log(err);
