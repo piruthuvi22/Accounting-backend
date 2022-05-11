@@ -39,4 +39,17 @@ router.post("/add-sale", (req, res) => {
   });
 });
 
+router.delete("/delete-sale/:id", (req, res) => {
+  let id = req.params.id;
+  Sales.findByIdAndDelete({ _id: id }, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(501).json(err);
+    } else {
+      console.log("Sale deleted");
+      res.status(200).json("Sale deleted");
+    }
+  });
+});
+
 module.exports = router;

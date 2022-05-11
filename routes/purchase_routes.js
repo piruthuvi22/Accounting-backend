@@ -23,7 +23,6 @@ router.get("/get-purchases", (req, res) => {
 router.post("/add-purchase", (req, res) => {
   const req_body = req.body;
   const purchase_doc = new Purchases({
-    InvoiceNo: req_body.InvoiceNo,
     Date: req_body.Date,
     Supplier: req_body.Supplier,
     Description: req_body.Description,
@@ -50,6 +49,19 @@ router.get("/get-supplier-products", (req, res) => {
       console.log("Get supplier products successfully");
       console.log(data);
       res.status(200).json(data);
+    }
+  });
+});
+
+router.delete("/delete-purchase/:id", (req, res) => {
+  let id = req.params.id;
+  Purchases.findByIdAndDelete({ _id: id }, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(501).json(err);
+    } else {
+      console.log("Purchases deleted");
+      res.status(200).json("Purchases deleted");
     }
   });
 });

@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
 const salesSchema = mongoose.Schema({
-  InvoiceNo: {
-    type: String,
-  },
   Date: {
     type: Date,
-    default: new Date(),
   },
   Customer: {
     type: String,

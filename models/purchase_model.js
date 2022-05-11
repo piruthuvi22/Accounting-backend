@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
 const purchaseSchema = mongoose.Schema({
-  InvoiceNo: {
-    type: String,
-  },
   Date: {
     type: Date,
-
   },
   Supplier: {
     type: String,

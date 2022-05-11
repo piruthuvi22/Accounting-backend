@@ -61,4 +61,17 @@ router.get("/get-supplier-data/:name", (req, res) => {
   });
 });
 
+router.get("/get-product-data/:id", (req, res) => {
+  const id = req.params.id;
+  Products.find({ _id: id }, (err, data) => {
+    if (err) {
+      res.status(501).json(err);
+    } else {
+      console.log("Get products's data successfully");
+      console.log(data);
+      res.status(200).json(data);
+    }
+  });
+});
+
 module.exports = router;
