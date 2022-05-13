@@ -20,6 +20,7 @@ router.post("/add-product", (req, res) => {
   const req_body = req.body;
   const product_doc = Products({
     Date: req_body.Date,
+    SupplierID: req_body.SupplierID,
     Supplier: req_body.Supplier,
     Product: req_body.Product,
     UnitPrice: req_body.UnitPrice,
@@ -48,9 +49,9 @@ router.delete("/delete-product/:id", (req, res) => {
 });
 
 //Get supplier's products
-router.get("/get-supplier-data/:name", (req, res) => {
-  const name = req.params.name;
-  Products.find({ Supplier: name }, (err, data) => {
+router.get("/get-supplier-data/:id", (req, res) => {
+  const id = req.params.id;
+  Products.find({ SupplierID:id }, (err, data) => {
     if (err) {
       res.status(501).json(err);
     } else {

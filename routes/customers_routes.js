@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Customers = require("../models/customers_model");
+const Sales = require("../models/sales_model");
 
 router.get("/get-customers", (req, res) => {
   Customers.find((err, data) => {
@@ -46,7 +47,6 @@ router.delete("/delete-customer/:id", (req, res) => {
   });
 });
 
-
 // get customers all id
 router.get("/get-customers-id", (req, res) => {
   Customers.find((err, data) => {
@@ -56,6 +56,38 @@ router.get("/get-customers-id", (req, res) => {
     } else {
       console.log("Get customers id successfully");
       res.status(200).json(data);
+    }
+  });
+});
+
+router.put("/update-customer/:id", (req, res) => {
+  let id = req.params.id;
+  let req_body = req.body;
+  let payload = {
+    Name: req_body.Name,
+    Email: req_body.Email,
+    Address: req_body.Address,
+    PhoneNo: req_body.PhoneNo,
+  };
+  Customers.findByIdAndUpdate(id, payload, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(501).json(err);
+    } else {
+      console.log("Customer updated");
+      Sales.findOneAndUpdate(
+        { CustomerID: id },
+        { Customer: req_body.Name },
+        (err, data) => {
+          if (err) {
+            console.log(err);
+            res.status(501).json(err);
+          } else {
+            console.log("Sales updated");
+            res.status(200).json("Sales updated");
+          }
+        }
+      );
     }
   });
 });

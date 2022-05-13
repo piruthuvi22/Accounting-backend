@@ -22,6 +22,7 @@ router.post("/add-sale", (req, res) => {
   const sales_doc = new Sales({
     InvoiceNo: req_body.InvoiceNo,
     Date: req_body.Date,
+    CustomerID: req_body.CustomerID,
     Customer: req_body.Customer,
     Description: req_body.Description,
     Quantity: req_body.Quantity,

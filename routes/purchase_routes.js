@@ -25,6 +25,7 @@ router.post("/add-purchase", (req, res) => {
   const purchase_doc = new Purchases({
     Date: req_body.Date,
     Supplier: req_body.Supplier,
+    SupplierID: req_body.SupplierID,
     Description: req_body.Description,
     Quantity: req_body.Quantity,
     UnitPrice: req_body.UnitPrice,

@@ -4,6 +4,9 @@ const purchaseSchema = mongoose.Schema({
   Date: {
     type: Date,
   },
+  SupplierID: {
+    type: String,
+  },
   Supplier: {
     type: String,
   },
